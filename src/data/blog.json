@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "how-to-pick-the-right-size-for-your-child",
+    "title": "How to pick the right size for your child (without the guesswork)",
+    "excerpt": "Age is a starting point, not the answer. Here's the 2-minute measuring routine we swear by.",
+    "image": "category-girls",
+    "author": "Team Tiniqo",
+    "date": "2026-10-04",
+    "readMinutes": 4,
+    "tags": ["Sizing", "Guides"],
+    "body": [
+      { "type": "p", "text": "Children grow in bursts, and two kids of the same age can easily be two sizes apart. That's why we always recommend measuring before you order." },
+      { "type": "h2", "text": "What you'll need" },
+      { "type": "ul", "items": ["A soft measuring tape", "A well-fitting outfit your child already loves", "Two minutes and a little patience"] },
+      { "type": "h2", "text": "Measure chest, waist and length" },
+      { "type": "p", "text": "Wrap the tape around the fullest part of the chest, under the arms. For the waist, measure around the natural waistline. For length, measure from the shoulder to where you'd like the hem to fall." },
+      { "type": "h2", "text": "Between sizes? Size up" },
+      { "type": "p", "text": "If your child sits between two sizes, pick the bigger one — they'll grow into it, and our cotton pieces are designed with a little room to move." }
+    ]
+  },
+  {
+    "slug": "festive-dressing-for-little-ones",
+    "title": "Festive dressing for little ones: comfy, cute and itch-free",
+    "excerpt": "Long pujas, late dinners, endless photos — how to choose festive wear your child will actually keep on.",
+    "image": "category-boys",
+    "author": "Team Tiniqo",
+    "date": "2026-10-18",
+    "readMinutes": 5,
+    "tags": ["Festive", "Style"],
+    "body": [
+      { "type": "p", "text": "Festive outfits should feel as good as they look. The secret is in the fabric and the lining." },
+      { "type": "h2", "text": "Choose soft linings" },
+      { "type": "p", "text": "Embellished fabrics can scratch delicate skin. Always look for a full cotton lining in lehengas, anarkalis and kurtas." },
+      { "type": "h2", "text": "Easy closures win" },
+      { "type": "ul", "items": ["Elastic waists for quick bathroom breaks", "Side zips instead of long rows of hooks", "Wooden buttons that are easy for little fingers"] },
+      { "type": "p", "text": "Pack a simple cotton change for the drive home — tired kids will thank you." }
+    ]
+  },
+  {
+    "slug": "caring-for-baby-clothes",
+    "title": "Caring for baby clothes so they stay soft for longer",
+    "excerpt": "Gentle detergents, cold washes and a little sunshine — our simple routine for newborn wardrobes.",
+    "image": "category-baby",
+    "author": "Team Tiniqo",
+    "date": "2026-11-06",
+    "readMinutes": 3,
+    "tags": ["Care", "Baby"],
+    "body": [
+      { "type": "p", "text": "Baby skin is sensitive, so how you wash matters as much as what you buy." },
+      { "type": "h2", "text": "Wash before first wear" },
+      { "type": "p", "text": "A gentle pre-wash removes any finishing residue from production and softens the fibres." },
+      { "type": "h2", "text": "Our routine" },
+      { "type": "ul", "items": ["Use a mild, fragrance-free detergent", "Wash in cold water on a gentle cycle", "Skip fabric softener on muslin — it reduces absorbency", "Dry in shade to keep colours fresh"] }
+    ]
+  }
+]
