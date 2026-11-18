@@ -11,9 +11,9 @@ export function SectionHeading({
   as: Tag = "h2",
   className,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | undefined;
   title: string;
-  description?: string;
+  description?: string | undefined;
   action?: ReactNode;
   align?: "left" | "center";
   as?: "h1" | "h2" | "h3";
