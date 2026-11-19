@@ -1,3 +1,5 @@
+import type { AppHref } from "@/components/common/AppLink";
+
 import type { Product } from "./types";
 import { ageBands, budgets, genders, occasions, styles } from "./taxonomy";
 
@@ -6,7 +8,7 @@ export interface Collection {
   title: string;
   description: string;
   match: (p: Product) => boolean;
-  crumbs: { label: string; to?: string }[];
+  crumbs: { label: string; to?: AppHref }[];
 }
 
 const genderLabel = (g: string) => genders.find((x) => x.slug === g)?.label ?? g;
@@ -27,7 +29,7 @@ export function resolveCollection(slug: string): Collection | null {
   const gMatch = (p: Product) => (gender ? p.gender === gender : true);
   const gTitle = gender ? `${genderLabel(gender)} ` : "";
   const baseCrumbs: Collection["crumbs"] = gender
-    ? [{ label: genderLabel(gender), to: `/${gender}` }]
+    ? [{ label: genderLabel(gender), to: `/${gender}` as const }]
     : [];
 
   const make = (title: string, description: string, match: (p: Product) => boolean): Collection => ({
@@ -44,7 +46,7 @@ export function resolveCollection(slug: string): Collection | null {
       title: `All ${genderLabel(gender)}`,
       description: `Every ${genderLabel(gender).toLowerCase()} style in one place — ethnic, party and everyday.`,
       match: gMatch,
-      crumbs: [{ label: genderLabel(gender), to: `/${gender}` }, { label: "All" }],
+      crumbs: [{ label: genderLabel(gender), to: `/${gender}` as const }, { label: "All" }],
     };
   }
   if (rest === "all") return make(`${gTitle}All Products`.trim(), "Browse the full Tiniqo collection.", () => true);
