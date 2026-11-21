@@ -14,7 +14,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 const PAYMENT_LABEL = { upi: "UPI", card: "Card", netbanking: "Netbanking", wallet: "Wallet", cod: "Cash on Delivery" } as const;
 
 export const Route = createFileRoute("/order-success")({
-  validateSearch: (s: Record<string, unknown>): { order?: string } => (typeof s.order === "string" ? { order: s.order } : {}),
+  validateSearch: (s: Record<string, unknown>): { order?: string } => (typeof s["order"] === "string" ? { order: s["order"] } : {}),
   head: () => {
     const { meta } = seo({ title: "Order Confirmed", description: "Thank you for shopping with Tiniqo — your order is confirmed." });
     return { meta: [...meta, { name: "robots", content: "noindex" }] };

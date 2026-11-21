@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { InfoPage } from "@/components/common/InfoPage";
+import { PolicyPage } from "@/components/common/ContentPages";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/shipping-policy")({
-  head: () => seo({ title: "Shipping Policy", description: "Tiniqo shipping timelines and charges." }),
-  component: () => <InfoPage title="Shipping Policy" description="Tiniqo shipping timelines and charges." />,
+  head: () => seo({
+    title: "Shipping Policy",
+    description: "Review Tiniqo shipping coverage, dispatch estimates, standard charges and express delivery information.",
+  }),
+  component: () => <PolicyPage kind="shipping" />,
 });

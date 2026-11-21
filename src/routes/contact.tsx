@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { InfoPage } from "@/components/common/InfoPage";
+import { ContactPage } from "@/components/common/ContentPages";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => seo({ title: "Contact Us", description: "Reach Tiniqo by phone, WhatsApp or email." }),
-  component: () => <InfoPage title="Contact Us" description="Reach Tiniqo by phone, WhatsApp or email." />,
+  head: () => seo({
+    title: "Contact Us",
+    description: "Get in touch with Tiniqo for sizing guidance, order questions and friendly shopping support.",
+  }),
+  component: ContactPage,
 });

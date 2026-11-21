@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-
-import { InfoPage } from "@/components/common/InfoPage";
+import { PolicyPage } from "@/components/common/ContentPages";
+import { siteConfig } from "@/config/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/exchange-return")({
-  head: () => seo({ title: "Exchange & Return", description: "Tiniqo's 7-day easy exchange policy." }),
-  component: () => <InfoPage title="Exchange & Return" description="Tiniqo's 7-day easy exchange policy." />,
+  head: () => seo({
+    title: "Exchange & Return Policy",
+    description: `Learn about Tiniqo’s ${siteConfig.exchangeWindowDays}-day exchange window, eligibility and support for damaged or incorrect items.`,
+  }),
+  component: () => <PolicyPage kind="exchange" />,
 });

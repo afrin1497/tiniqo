@@ -1,7 +1,7 @@
 import type { SizeRow } from "@/data/sizeChart";
 import { cn } from "@/lib/utils";
 
-export function SizeTable({ rows, highlight }: { rows: SizeRow[]; highlight?: string }) {
+export function SizeTable({ rows, highlight }: { rows: SizeRow[]; highlight?: string | undefined }) {
   return (
     <div className="overflow-x-auto rounded-xl border border-border">
       <table className="w-full min-w-[420px] text-sm">

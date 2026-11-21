@@ -26,7 +26,7 @@ export const Route = createFileRoute("/checkout")({
 });
 
 type Form = { email: string; phone: string; name: string; line1: string; line2: string; city: string; state: string; pincode: string };
-type FormErrors = Partial<Record<keyof Form, string>>;
+type FormErrors = Partial<Record<keyof Form, string | undefined>>;
 
 const EMPTY: Form = { email: "", phone: "", name: "", line1: "", line2: "", city: "", state: "", pincode: "" };
 
@@ -326,7 +326,7 @@ function Section({ n, title, children }: { n: number; title: string; children: R
   );
 }
 
-function F({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
+function F({ id, label, error, children }: { id: string; label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label htmlFor={id}>{label}</Label>
