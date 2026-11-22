@@ -490,10 +490,22 @@ export function BulkEnquiryPage() {
 
 type PolicyKind = "shipping" | "exchange" | "privacy" | "terms";
 
-const policies: Record<
-  PolicyKind,
-  { title: string; description: string; sections: { title: string; text: string }[] }
-> = {
+type PolicySection = {
+  title: string;
+  text?: string;
+  steps?: string[];
+  bullets?: string[];
+};
+
+type Policy = {
+  title: string;
+  description: string;
+  sections: PolicySection[];
+  /** Present once the copy is final; omitted while the policy is still a draft. */
+  confirmed?: { lastUpdated: string; summary: string[] };
+};
+
+const policies: Record<PolicyKind, Policy> = {
   shipping: {
     title: "Shipping policy",
     description: "A guide to dispatch, delivery and shipping charges.",
@@ -522,27 +534,61 @@ const policies: Record<
   },
   exchange: {
     title: "Exchange & return policy",
-    description: "How to ask for a different size or report a problem with your order.",
+    description: "How to return or exchange an item, what we can accept, and when refunds reach you.",
+    confirmed: {
+      lastUpdated: "22 November 2026",
+      summary: [
+        `${siteConfig.returnWindowDays}-day returns from the day of delivery`,
+        "Free size exchange on your first request",
+        `Refunds within ${siteConfig.refundProcessingDays} days of inspection`,
+        "Personalised and hygiene-sealed items are not returnable",
+      ],
+    },
     sections: [
       {
-        title: "The exchange window",
-        text: `Request an eligible size or style exchange within ${siteConfig.exchangeWindowDays} days of delivery. Keep the item unworn, unwashed and in its original condition, with tags and packaging intact.`,
+        title: "What you can return or exchange",
+        text: `You may return or exchange any item within ${siteConfig.returnWindowDays} days of delivery. Items must be unworn, unwashed and unaltered, free of stains, odour or pet hair, with the original tags, packaging and invoice intact. Between sizes? Your first size exchange is free — just tell us the size you need.`,
       },
       {
-        title: "How to request an exchange",
-        text: "Contact us by email or WhatsApp with your order number, the item you wish to exchange and your preferred replacement. Please wait for instructions before sending an item back. Replacement styles and sizes depend on availability.",
+        title: "How to return or exchange",
+        steps: [
+          "Message us by email or WhatsApp with your order number, the item and the reason for the return.",
+          "We confirm eligibility and share a pickup slot or a return address.",
+          "Pack the item safely with the invoice and hand it over to the courier.",
+          "Once the item passes inspection, we dispatch your replacement or start your refund.",
+        ],
+        text: "Please wait for our go-ahead before sending anything back — unapproved returns may not be accepted. Replacement styles and sizes depend on availability.",
       },
       {
-        title: "Pickup and inspection",
-        text: "We will explain the available return or pickup method and any applicable charges before proceeding. Returned items are checked for eligibility. If a requested replacement is unavailable, we will discuss alternatives rather than substitute without your agreement.",
+        title: "Return shipping and pickup charges",
+        text: `Pickup is free when the item is damaged, defective or not what you ordered, and for your first size exchange. For a change-of-mind return, a ${money(siteConfig.returnPickupFee)} pickup fee is deducted from your refund. If you arrange your own courier we cannot cover that cost, and the original shipping charge is not refunded.`,
       },
       {
-        title: "Damaged or incorrect items",
-        text: "If an item arrives damaged or differs from your order, contact us promptly with your order number and clear photographs. Keep the product and packaging while the issue is reviewed. Where confirmed, we will discuss an appropriate replacement or refund.",
+        title: "Refunds",
+        text: `Approved refunds are initiated within ${siteConfig.refundProcessingDays} days of the returned item passing inspection and are credited to the original payment method. Cash-on-delivery orders are refunded to the UPI ID or bank account you share. Banks and wallets may need a further 3–5 working days to post the credit.`,
       },
       {
-        title: "Refunds and exclusions",
-        text: "For a change of mind, the proposed remedy is an eligible exchange or agreed store credit rather than an automatic refund. Any exclusions, such as personalised items, must be disclosed before purchase. Approved refund methods and timelines will be confirmed individually. Nothing in this policy limits applicable statutory rights.",
+        title: "Items we can’t accept",
+        bullets: [
+          "Personalised or monogrammed pieces",
+          "Hygiene-sealed items such as socks, innerwear and swimwear once opened",
+          "Anything marked final sale",
+          "Items that have been worn, washed, altered or damaged through use",
+          "Items with missing tags or packaging",
+          "Requests raised after the return window has closed",
+        ],
+      },
+      {
+        title: "Damaged, defective or incorrect items",
+        text: `Tell us within ${siteConfig.returnWindowDays} days of delivery and send clear photographs of the item and its packaging. Keep the product and packaging until the review is complete. Where the issue is confirmed, we arrange a free pickup and offer a replacement, or a full refund including shipping if no replacement is available.`,
+      },
+      {
+        title: "Gifts, store credit and bulk orders",
+        text: `A gift can be exchanged or returned with the order number from the sender; the refund goes to the original payment method, or we can issue store credit valid for ${siteConfig.storeCreditValidityMonths} months. Wholesale, school and bulk orders follow the terms agreed at the time of the order.`,
+      },
+      {
+        title: "Your consumer rights",
+        text: "Nothing in this policy limits your rights under applicable consumer protection law, including the right to a remedy for defective goods. If a return is declined, we will explain why and return the item to you or hold it for collection.",
       },
     ],
   },
@@ -619,17 +665,34 @@ export function PolicyPage({ kind }: { kind: PolicyKind }) {
         crumbs={[{ label: policy.title }]}
       />
       <div className="container-page max-w-3xl space-y-8 py-10 md:py-16">
-        <aside className="rounded-xl border border-border bg-sage-soft p-6">
-          <p className="font-bold">[Placeholder — replace with your own policy]</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Draft copy for review only. Confirm your legal business details,
-            actual operations and applicable consumer and privacy requirements
-            before publishing.
-          </p>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Last updated: Draft — publication date to be confirmed.
-          </p>
-        </aside>
+        {policy.confirmed ? (
+          <aside className="rounded-xl border border-border bg-sage-soft p-6">
+            <h2 className="font-bold">The short version</h2>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {policy.confirmed.summary.map((line) => (
+                <li key={line} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <Check className="mt-0.5 size-4 shrink-0 text-sage-deep" aria-hidden="true" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Last updated: {policy.confirmed.lastUpdated}.
+            </p>
+          </aside>
+        ) : (
+          <aside className="rounded-xl border border-border bg-sage-soft p-6">
+            <p className="font-bold">[Placeholder — replace with your own policy]</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Draft copy for review only. Confirm your legal business details,
+              actual operations and applicable consumer and privacy requirements
+              before publishing.
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Last updated: Draft — publication date to be confirmed.
+            </p>
+          </aside>
+        )}
         <nav aria-label={`${policy.title} sections`} className={panel}>
           <h2 className="font-bold">On this page</h2>
           <ol className="mt-4 list-inside list-decimal space-y-2">
@@ -652,7 +715,19 @@ export function PolicyPage({ kind }: { kind: PolicyKind }) {
             className="scroll-mt-28"
           >
             <h2 className="text-xl font-bold">{section.title}</h2>
-            <p className="mt-3 leading-relaxed text-muted-foreground">{section.text}</p>
+            {section.text && (
+              <p className="mt-3 leading-relaxed text-muted-foreground">{section.text}</p>
+            )}
+            {section.steps && (
+              <ol className="mt-3 list-inside list-decimal space-y-2 leading-relaxed text-muted-foreground marker:font-semibold marker:text-sage-deep">
+                {section.steps.map((step) => <li key={step}>{step}</li>)}
+              </ol>
+            )}
+            {section.bullets && (
+              <ul className="mt-3 list-inside list-disc space-y-2 leading-relaxed text-muted-foreground marker:text-sage-deep">
+                {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+              </ul>
+            )}
           </section>
         ))}
         <section className={panel}>

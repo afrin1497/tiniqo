@@ -15,6 +15,10 @@ export const siteConfig = {
   flatShippingFee: 79,
   expressShippingFee: 149,
   exchangeWindowDays: 7,
+  returnWindowDays: 7,
+  refundProcessingDays: 7,
+  returnPickupFee: 99,
+  storeCreditValidityMonths: 12,
 
   // Coupons are mocked until a backend is connected.
   coupons: [

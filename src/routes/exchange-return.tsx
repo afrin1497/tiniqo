@@ -6,7 +6,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/exchange-return")({
   head: () => seo({
     title: "Exchange & Return Policy",
-    description: `Learn about Tiniqo’s ${siteConfig.exchangeWindowDays}-day exchange window, eligibility and support for damaged or incorrect items.`,
+    description: `Returns and exchanges within ${siteConfig.returnWindowDays} days of delivery: eligibility, pickup charges, refund timelines and what we can’t accept.`,
   }),
   component: () => <PolicyPage kind="exchange" />,
 });

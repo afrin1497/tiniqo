@@ -1,5 +1,7 @@
 export interface Faq { q: string; a: string }
 
+import { siteConfig } from "@/config/site";
+
 export const faqGroups: { id: string; title: string; items: Faq[] }[] = [
   {
     id: "sizing",
@@ -32,9 +34,9 @@ export const faqGroups: { id: string; title: string; items: Faq[] }[] = [
     id: "exchange",
     title: "Exchange",
     items: [
-      { q: "What is your exchange policy?", a: "Easy 7-day exchange for size or style, with tags intact and the item unworn and unwashed." },
+      { q: "What is your exchange policy?", a: `Easy ${siteConfig.returnWindowDays}-day exchange or return for size or style, with tags intact and the item unworn and unwashed.` },
       { q: "How do I request an exchange?", a: "Message us on WhatsApp or email with your order number and we'll arrange a pickup." },
-      { q: "Do you offer refunds?", a: "Refunds are offered for damaged or incorrect items. Otherwise we offer exchange or store credit." },
+      { q: "Do you offer refunds?", a: `Yes. Approved returns are refunded to your original payment method within ${siteConfig.refundProcessingDays} days of the item passing inspection. A ${siteConfig.currencySymbol}${siteConfig.returnPickupFee} pickup fee applies to change-of-mind returns; damaged or incorrect items are picked up free.` },
     ],
   },
   {
