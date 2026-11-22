@@ -47,7 +47,7 @@ function OrderSuccess() {
         <dl className="mt-6 grid gap-3 text-left sm:grid-cols-3">
           <div className="rounded-xl bg-secondary p-4"><dt className="text-xs uppercase tracking-wide text-muted-foreground">Order number</dt><dd className="mt-1 font-heading text-lg font-extrabold">{order.id}</dd></div>
           <div className="rounded-xl bg-secondary p-4"><dt className="text-xs uppercase tracking-wide text-muted-foreground">Estimated delivery</dt><dd className="mt-1 flex items-center gap-1.5 font-bold"><Truck className="size-4 text-sage-deep" aria-hidden />{formatDate(order.estimatedDelivery)}</dd></div>
-          <div className="rounded-xl bg-secondary p-4"><dt className="text-xs uppercase tracking-wide text-muted-foreground">Payment</dt><dd className="mt-1 font-bold">{PAYMENT_LABEL[order.paymentMethod]}{order.paymentMethod === "cod" ? " · pay on delivery" : " · paid"}</dd></div>
+          <div className="rounded-xl bg-secondary p-4"><dt className="text-xs uppercase tracking-wide text-muted-foreground">Payment</dt><dd className="mt-1 font-bold">{PAYMENT_LABEL[order.paymentMethod]}{order.paymentMethod === "cod" ? "" : " · paid"}</dd></div>
         </dl>
       </section>
 

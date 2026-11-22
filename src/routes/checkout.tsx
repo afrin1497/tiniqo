@@ -306,8 +306,10 @@ function CheckoutPage() {
           </Button>
           <p className="flex items-start gap-2 text-xs text-muted-foreground">
             <ShieldCheck className="size-4 shrink-0 text-sage-deep" aria-hidden />
-            Payments are encrypted and processed securely. We never store your card details. By placing this order you agree to our{" "}
-            <Link to="/terms" className="underline underline-offset-2">Terms</Link>.
+            <span>
+              Payments are encrypted and processed securely. We never store your card details. By placing this order you agree to our{" "}
+              <Link to="/terms" className="underline underline-offset-2">Terms</Link>.
+            </span>
           </p>
         </aside>
       </form>

@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Store data is mock JSON in `src/data` and cart/wishlist/account/orders live in localStorage via `src/lib/store.tsx`; swap these for a database later without touching page components.
+- Checkout only calls `processPayment()` in `src/lib/payments`; replace that one function to go live with Razorpay or Stripe.
+- Prices, fees, coupons and contact details come from `src/config/site.ts`; never hardcode them in pages. Pricing and size rules are covered by tests in `src/test`.
