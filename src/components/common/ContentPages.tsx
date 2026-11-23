@@ -715,9 +715,6 @@ export function PolicyPage({ kind }: { kind: PolicyKind }) {
             className="scroll-mt-28"
           >
             <h2 className="text-xl font-bold">{section.title}</h2>
-            {section.text && (
-              <p className="mt-3 leading-relaxed text-muted-foreground">{section.text}</p>
-            )}
             {section.steps && (
               <ol className="mt-3 list-inside list-decimal space-y-2 leading-relaxed text-muted-foreground marker:font-semibold marker:text-sage-deep">
                 {section.steps.map((step) => <li key={step}>{step}</li>)}
@@ -727,6 +724,9 @@ export function PolicyPage({ kind }: { kind: PolicyKind }) {
               <ul className="mt-3 list-inside list-disc space-y-2 leading-relaxed text-muted-foreground marker:text-sage-deep">
                 {section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
               </ul>
+            )}
+            {section.text && (
+              <p className="mt-3 leading-relaxed text-muted-foreground">{section.text}</p>
             )}
           </section>
         ))}
